@@ -1,0 +1,17 @@
+{
+  "extends": ["standard", "standard-jsx", "prettier"],
+  "parser": "babel-eslint",
+  "plugins": ["flowtype"],
+  "rules": {
+    "eol-last": ["error", "always"],
+    "jsx-quotes": ["error", "prefer-double"],
+    "space-before-function-paren": 0,
+    "flowtype/define-flow-type": 1,
+    "react/no-unused-prop-types": 1
+  },
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": false
+    }
+  }
+}
