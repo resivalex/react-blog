@@ -1,0 +1,19 @@
+version: "3"
+services:
+  nginx:
+    build: ./dockers/nginx
+    ports:
+    - 80:80
+    depends_on:
+    - sinatra
+    links:
+    - sinatra
+  sinatra:
+    environment:
+      - RACK_ENV=production
+    build: .
+    command: ruby lib/app.rb
+    expose:
+    - 4567
+    ports:
+    - 4567:4567
