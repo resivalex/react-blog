@@ -1,42 +1,68 @@
 // @flow
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { Container } from './Thema'
+import Modal from 'react-responsive-modal'
 
 const HeaderBlock = styled.div`
   background-color: black;
-  padding: 20px;
   margin: 0;
 `
 
-const Circle = styled.div`
-  width: 20px;
-  height: 20px;
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`
+
+const PhotoPreview = styled.div`
+  width: 64px;
+  height: 64px;
+  cursor: zoom-in;
   border-radius: 50%;
-  background-color: white;
   display: inline-block;
+  background-size: contain;
+  background-image: url(/face.jpg);
 `
 
 const Spacer = styled.div`
   display: inline-block;
-  width: 10px;
+  width: 20px;
 `
 
 const Title = styled.div`
   color: white;
-  font-size: 36px;
+  font-size: 40px;
   font-weight: bold;
   display: inline-block;
 `
 
+const Photo = styled.img`
+  width: 100%;
+`
+
 type Props = {}
 
-export default class Header extends Component<Props> {
+type State = {
+  isOpen: boolean
+}
+
+export default class Header extends Component<Props, State> {
+  state = { isOpen: false }
+
   render() {
     return (
       <HeaderBlock>
-        <Circle />
-        <Spacer />
-        <Title>Ivan Reshetnikov</Title>
+        <Container>
+          <Wrapper>
+            <Modal open={this.state.isOpen} onClose={() => this.setState({ isOpen: false })}>
+              <Photo src="/photo.jpg" />
+            </Modal>
+            <PhotoPreview onClick={() => this.setState({ isOpen: true })} />
+            <Spacer />
+            <Title>Ivan Reshetnikov</Title>
+          </Wrapper>
+        </Container>
       </HeaderBlock>
     )
   }
