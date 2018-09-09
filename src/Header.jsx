@@ -17,6 +17,7 @@ const Wrapper = styled.div`
 
 const PhotoPreview = styled.div`
   width: 64px;
+  min-width: 64px;
   height: 64px;
   cursor: zoom-in;
   border-radius: 50%;
