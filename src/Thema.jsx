@@ -15,15 +15,6 @@ const SectionHeader = styled.div`
   padding: 20px 0;
 `
 
-const Tag = styled.div`
-  list-style: none;
-  border: solid 1px black;
-  padding: 4px 10px;
-  margin-bottom: 8px;
-  border-radius: 20px;
-  display: inline-block;
-`
-
 const Link = styled.a`
   color: black;
   text-decoration: underline;
@@ -36,10 +27,12 @@ class Paragraph extends Component<{ children: any }> {
   render() {
     const Border = styled.div`
       width: 5px;
+      min-width: 5px;
     `
 
     const Spacer = styled.div`
       width: 15px;
+      min-width: 15px;
     `
 
     const Wrapper = styled.div`
@@ -103,7 +96,6 @@ const HalfLine = styled.div`
 export {
   Container,
   SectionHeader,
-  Tag,
   Link,
   StraightLink,
   Paragraph,

@@ -10,7 +10,8 @@ import {
   ListHeader,
   ListItem,
   Line,
-  HalfLine
+  HalfLine,
+  Link
 } from './Thema'
 import Period from './Period'
 import GlyphIconWrapper from './GlyphIconWrapper'
@@ -21,29 +22,43 @@ const Wrapper = styled.div`
   font-family: 'Open Sans', sans-serif;
 `
 
+const Footer = styled.div`
+  height: 100px;
+`
+
 type Props = {}
 
 export default class Resume extends Component<Props> {
   render() {
+    const nascaCompany = (
+      <GlyphIconWrapper name="map-marker">
+        <Term
+          title="Nasca Ltd."
+          description={
+            <Fragment>
+              <StraightLink link="http://piratetrade.ru" />
+              <HalfLine />
+              <div>Exchange trading company</div>
+            </Fragment>
+          }
+        />
+      </GlyphIconWrapper>
+    )
+
     return (
       <Wrapper>
         <Header />
         <Container>
           <SectionHeader>About me</SectionHeader>
           <Paragraph>
+            <Line>I like writing beautiful and clear code, am interested in new technologies</Line>
             <Line>
-              I like writing beautiful and understandable code, have interest to new technologies
+              I was engaged in olympiad programming at the university [
+              <Link href="http://acm.timus.ru/author.aspx?id=79813">1</Link>
+              ], [<Link href="http://codeforces.com/profile/Reshetnikov_Ivan">2</Link>]
             </Line>
-            <Line>I used to do olympiad programming at university</Line>
-            <ListItem>
-              <StraightLink link="http://acm.timus.ru/author.aspx?id=79813" />
-            </ListItem>
-            <ListItem>
-              <StraightLink link="http://codeforces.com/profile/Reshetnikov_Ivan" />
-            </ListItem>
+            <Line>So, I have a good idea of the effectiveness and use of algorithms</Line>
             <HalfLine />
-            <HalfLine />
-            <Line>I have a good sense of algorithm effectiveness and usage</Line>
             <Line>
               GitHub profile <StraightLink link="https://github.com/resivalex" />
             </Line>
@@ -59,27 +74,32 @@ export default class Resume extends Component<Props> {
                   <Fragment>
                     <StraightLink link="https://oneretarget.com" />
                     <HalfLine />
-                    <div>A service to manage ad platforms at one account</div>
+                    <div>A service to manage several ad platforms at one account</div>
                   </Fragment>
                 }
               />
             </GlyphIconWrapper>
             <ListHeader>Tasks</ListHeader>
             <ListItem>Creating tool to analize and manage ads</ListItem>
-            <ListItem>
-              Syncing statistics, moderation statuses. Implementation new formats. Error handling
-            </ListItem>
-            <ListItem>Discusing implementation strategies. Code Review</ListItem>
-            <ListItem>System deploy. Reserve dumps. System health status monitoring</ListItem>
+            <ListItem>Synchronization of statistics, state of moderation</ListItem>
+            <ListItem>Implementing of new formats. Error handling</ListItem>
+            <ListItem>Discussion of implementation strategies. Code review</ListItem>
+            <ListItem>Deployment of the system. Backups. System state monitoring</ListItem>
             <ListHeader>Archivements</ListHeader>
             <ListItem>
-              Adapt API in such way it's possible to use for external users and frontend
+              Modifying the API in such a way it can be used for external users and the frontend
             </ListItem>
-            <ListItem>Sync and display ad performance from Yandex.Metrica</ListItem>
-            <ListItem>Add section for detection problem in the system</ListItem>
-            <ListItem>Made interactive widgets: week schedule, mass copying, ad preview</ListItem>
-            <ListItem>Migrate frontend from CoffeeScript and jQuery to ES6 and React</ListItem>
-            <ListItem>Fix layout and use single style across user account</ListItem>
+            <ListItem>
+              Synchronization and display of advertising performance from Yandex.Metrica data
+            </ListItem>
+            <ListItem>Adding a partition for problem detection in the system</ListItem>
+            <ListItem>
+              Implementation of interactive widgets: weekly schedule, bulk copying, ad preview
+            </ListItem>
+            <ListItem>Frontend migration from CoffeeScript and jQuery to ES6 and React</ListItem>
+            <ListItem>
+              Correction of the layout and use of the single style within the entire user account
+            </ListItem>
             <ListHeader>Technologies</ListHeader>
             <Tags
               items={[
@@ -89,21 +109,22 @@ export default class Resume extends Component<Props> {
                 'RSpec',
                 'Cucumber',
                 'Capybara',
+                'Jenkins',
                 'Docker',
                 'Capistrano',
                 'Trailblazer',
-                'Queue',
-                'API VK',
-                'myTarget',
-                'Facebook',
-                'AdWords',
-                'Metrica',
+                'delayed_job',
+                'VK API',
+                'myTarget API',
+                'Facebook API',
+                'AdWords API',
+                'Metrica API',
                 'React.js',
                 'ES6',
                 'SASS',
                 'BEM',
-                'Webpacker',
-                'npm',
+                'Webpack',
+                'yarn',
                 'styled-components',
                 'Redux',
                 'Flow'
@@ -125,12 +146,14 @@ export default class Resume extends Component<Props> {
               />
             </GlyphIconWrapper>
             <ListItem>Company projects support</ListItem>
-            <ListItem>Developing company's projects</ListItem>
+            <ListItem>Company's projects development</ListItem>
             <ListHeader>Technologies</ListHeader>
             <Tags
               items={[
                 'Ruby on Rails 4',
                 'RSpec',
+                'Linux',
+                'Capistrano',
                 'Capybara',
                 'AngularJS',
                 'CoffeeScript',
@@ -139,15 +162,15 @@ export default class Resume extends Component<Props> {
             />
           </Paragraph>
 
-          <SectionHeader>Self-Education</SectionHeader>
+          <SectionHeader>Self-education</SectionHeader>
           <Paragraph>
             <Period from="2016.02" to="2016.04" />
             <ListItem>
-              Rewrite diplom project{' '}
+              Graduation work rewriting{' '}
               <StraightLink link="https://github.com/resivalex/student-progress-on-rails" />
             </ListItem>
             <ListItem>
-              Develop site for batut center{' '}
+              Trampoline center website development{' '}
               <StraightLink link="https://github.com/resivalex/zaskok" />
             </ListItem>
             <ListHeader>Technologies</ListHeader>
@@ -155,6 +178,8 @@ export default class Resume extends Component<Props> {
               items={[
                 'Ruby on Rails',
                 'RSpec',
+                'Linux',
+                'Capistrano',
                 'CoffeeScript',
                 'AngularJS',
                 'PHP',
@@ -171,30 +196,21 @@ export default class Resume extends Component<Props> {
           <SectionHeader>Software developer</SectionHeader>
           <Paragraph>
             <Period from="2015.04" to="2016.01" />
-            <GlyphIconWrapper name="map-marker">
-              <Term
-                title="Nasca Ltd."
-                description={
-                  <Fragment>
-                    <StraightLink link="http://piratetrade.ru" />
-                    <HalfLine />
-                    <div>Exchange trading company</div>
-                  </Fragment>
-                }
-              />
-            </GlyphIconWrapper>
+            {nascaCompany}
             <ListItem>
-              Develop <StraightLink link="http://pskovskie.ru" /> from scratch
+              Website development <StraightLink link="http://pskovskie.ru" /> from scratch
             </ListItem>
             <ListItem>
-              Develop multi-component net application in a five-member team by Scrum methodology
+              Development of a multi-component network application in a team of five members using
+              the Scrum methodology
             </ListItem>
-            <ListItem>Full implementing a valuable world-edge component</ListItem>
-            <ListItem>Unit-tests with Catch framework</ListItem>
-            <ListItem>Particularly project and implementing a client application on Qt</ListItem>
+            <ListItem>
+              Full implementation of an important component interacting with the exchange
+            </ListItem>
+            <ListItem>Unit-testing with Catch framework</ListItem>
+            <ListItem>Partially designing and implementing a client application on Qt</ListItem>
             <ListItem>Using design patterns</ListItem>
-            <ListItem>System of version control SVN, Git</ListItem>
-            <ListItem>Code-review</ListItem>
+            <ListItem>Code review</ListItem>
             <ListHeader>Technologies</ListHeader>
             <Tags
               items={[
@@ -214,7 +230,6 @@ export default class Resume extends Component<Props> {
                 'Stash',
                 'JIRA',
                 'Confluence',
-                'SVN',
                 'Git'
               ]}
             />
@@ -223,23 +238,33 @@ export default class Resume extends Component<Props> {
           <SectionHeader>C++/Qt developer</SectionHeader>
           <Paragraph>
             <Period from="2012.12" to="2013.09" />
-            <Line>Nasca Ltd. Pskov</Line>
+            {nascaCompany}
             <ListHeader>Tasks</ListHeader>
-            <ListItem>Improvements of trading engine</ListItem>
-            <ListItem>Parse and analize exchange logs</ListItem>
-            <ListItem>Add features to deal log program</ListItem>
-            <ListItem>Develop program for emulation of exchange</ListItem>
-            <ListItem>E-mail sending to users of special sites</ListItem>
-            <ListItem>Add features to company's deal analize program</ListItem>
-            <ListItem>Download exchange logs automatically</ListItem>
+            <ListItem>Improvements of the trading engine</ListItem>
+            <ListItem>Exchange log parsing and analysis</ListItem>
+            <ListItem>Features implementing for a transaction logging software</ListItem>
+            <ListItem>Development of a program for emulation an exchange</ListItem>
+            <ListItem>Sending email to users of specialized sites</ListItem>
+            <ListItem>Automatic exchange log downloading</ListItem>
+            <ListItem>Using system of version control</ListItem>
+            <ListHeader>Technologies</ListHeader>
+            <Tags
+              items={['C++', 'C++ Standard Library', 'Qt', 'JavaScript', 'jQuery', 'HTML', 'SVN']}
+            />
           </Paragraph>
 
-          <SectionHeader>High school</SectionHeader>
+          <SectionHeader>Higher education</SectionHeader>
           <Paragraph>
             <GlyphIconWrapper name="send">
-              <Line>Pskov State University</Line>
-              <Line>2008 - 2013</Line>
-              <Line>Faculty of Informatics, Informatic systems and technologies</Line>
+              <Term
+                title="Pskov State University"
+                description={
+                  <Fragment>
+                    <Line>2008 - 2013</Line>
+                    <Line>Faculty of Informatics</Line>
+                  </Fragment>
+                }
+              />
             </GlyphIconWrapper>
           </Paragraph>
 
@@ -250,7 +275,15 @@ export default class Resume extends Component<Props> {
               <Line>English — Intermediate</Line>
             </GlyphIconWrapper>
           </Paragraph>
+
+          <SectionHeader>Contacts</SectionHeader>
+          <Paragraph>
+            <GlyphIconWrapper name="envelope">
+              <Link href="mailto:resivalex@gmail.com">resivalex@gmail.com</Link>
+            </GlyphIconWrapper>
+          </Paragraph>
         </Container>
+        <Footer />
       </Wrapper>
     )
   }
