@@ -80,7 +80,7 @@ export default class Resume extends Component<Props> {
               />
             </GlyphIconWrapper>
             <ListHeader>Tasks</ListHeader>
-            <ListItem>Creating tool to analize and manage ads</ListItem>
+            <ListItem>Creating tools to analize and manage ads</ListItem>
             <ListItem>Synchronization of statistics, state of moderation</ListItem>
             <ListItem>Implementing of new formats. Error handling</ListItem>
             <ListItem>Discussion of implementation strategies. Code review</ListItem>

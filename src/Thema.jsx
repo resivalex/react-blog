@@ -12,7 +12,7 @@ const Container = styled.div`
 const SectionHeader = styled.div`
   font-size: 24px;
   font-weight: bold;
-  padding: 20px 0;
+  padding: 30px 0 20px;
 `
 
 const Link = styled.a`
@@ -25,29 +25,18 @@ const Link = styled.a`
 
 class Paragraph extends Component<{ children: any }> {
   render() {
-    const Border = styled.div`
-      width: 5px;
-      min-width: 5px;
-    `
-
     const Spacer = styled.div`
-      width: 15px;
-      min-width: 15px;
+      width: 20px;
+      min-width: 20px;
     `
 
     const Wrapper = styled.div`
       font-size: 18px;
       display: flex;
-      &:hover {
-        ${Border} {
-          background-color: #eee;
-        }
-      }
     `
 
     return (
       <Wrapper>
-        <Border />
         <Spacer />
         <div>{this.props.children}</div>
       </Wrapper>
@@ -70,7 +59,7 @@ class StraightLink extends Component<Object> {
 
 const ListHeader = styled.div`
   font-weight: bold;
-  padding: 12px 0 4px;
+  padding: 16px 0 4px;
 `
 
 class ListItem extends Component<{ children: any }> {
