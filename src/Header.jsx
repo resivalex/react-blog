@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Container } from './Thema'
 import Modal from 'react-responsive-modal'
+import translateFuncForLocale from './translateFuncForLocale'
 
 const HeaderBlock = styled.div`
   background-color: black;
@@ -42,7 +43,9 @@ const Photo = styled.img`
   width: 100%;
 `
 
-type Props = {}
+type Props = {
+  locale: string
+}
 
 type State = {
   isOpen: boolean
@@ -52,6 +55,8 @@ export default class Header extends Component<Props, State> {
   state = { isOpen: false }
 
   render() {
+    const { locale } = this.props
+
     return (
       <HeaderBlock>
         <Container>
@@ -61,7 +66,7 @@ export default class Header extends Component<Props, State> {
             </Modal>
             <PhotoPreview onClick={() => this.setState({ isOpen: true })} />
             <Spacer />
-            <Title>Ivan Reshetnikov</Title>
+            <Title>{translateFuncForLocale(locale)('resume_owner_name')}</Title>
           </Wrapper>
         </Container>
       </HeaderBlock>

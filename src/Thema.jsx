@@ -70,7 +70,12 @@ class ListItem extends Component<{ children: any }> {
     const Hyphen = styled.span`
       padding: 0 10px;
     `
-    return <Wrapper><Hyphen>—</Hyphen>{this.props.children}</Wrapper>
+    return (
+      <Wrapper>
+        <Hyphen>—</Hyphen>
+        {this.props.children}
+      </Wrapper>
+    )
   }
 }
 
@@ -82,6 +87,30 @@ const HalfLine = styled.div`
   height: 6px;
 `
 
+const RadioGroup = styled.div`
+  display: inline-flex;
+`
+
+const RadioItem = styled.div`
+  cursor: ${({ active }) => (active ? 'default' : 'pointer')};
+  background-color: ${({ active }) => (active ? 'black' : 'white')};
+  color: ${({ active }) => (active ? 'white' : 'black')};
+    border-color: black;
+    border: solid 1px black;
+  padding: 5px;
+  &:not(:last-of-type) {
+    border-right: solid 1px black;
+  }
+  &:last-of-type {
+    border-radius: 0 15px 15px 0;
+    padding-right: 10px;
+  }
+  &:first-of-type {
+    border-radius: 15px 0 0 15px;
+    padding-left: 10px;
+  }
+`
+
 export {
   Container,
   SectionHeader,
@@ -91,5 +120,7 @@ export {
   ListHeader,
   ListItem,
   Line,
-  HalfLine
+  HalfLine,
+  RadioGroup,
+  RadioItem
 }

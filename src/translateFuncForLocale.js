@@ -1,0 +1,165 @@
+// @flow
+
+import I18n from 'node-polyglot'
+import memoize from 'memoize-one'
+import { ListItem } from './Thema'
+import React from 'react'
+
+const translations = {
+  en: {
+    resume_owner_name: 'Ivan Reshetnikov',
+    about_me: 'About me',
+    exchange_trading_company: 'Exchange trading company',
+    my_passion: 'I like writing beautiful and clear code, am interested in new technologies',
+    study_period_hobbi: 'I was engaged in olympiad programming at the university',
+    algorithm_knowledge: 'So, I have a good idea of the effectiveness and use of algorithms',
+    github_profile: 'GitHub profile',
+    ror_developer: 'Ruby on Rails developer',
+    ad_managing_service: 'A service to manage several ad platforms at one account',
+    present_time: 'Present',
+    january: 'January',
+    february: 'February',
+    march: 'March',
+    april: 'April',
+    may: 'May',
+    june: 'June',
+    july: 'July',
+    august: 'August',
+    september: 'September',
+    november: 'November',
+    october: 'October',
+    december: 'December',
+    year: 'year |||| years',
+    month: 'month |||| months',
+    tasks: 'Tasks',
+    achievements: 'Achievements',
+    technologies: 'Technologies',
+    create_ad_tools: 'Creating tools to analyze and manage ads',
+    sync_ads: 'Synchronization of statistics, state of moderation',
+    implement_formats: 'Implementing of new formats. Error handling',
+    discuss_solutions: 'Discussion of implementation strategies. Code review',
+    deploy_system: 'Deployment of the system. Backups. System state monitoring',
+    unify_api: 'Modifying the API in such a way it can be used for external users and the frontend',
+    sync_metrica: 'Synchronization and display of advertising performance from Yandex.Metrica data',
+    detect_problems: 'Adding a section for problem detection in the system',
+    implement_widgets:
+      'Implementation of interactive widgets: weekly schedule, bulk copying, ad preview',
+    migrate_to_react: 'Frontend migration from CoffeeScript and jQuery to ES6 and React',
+    correct_styles:
+      'Correction of the layout and use of the single style within the entire user account',
+    odin_project: 'Real estate project support and development',
+    academy_project: 'Beauty specialists qualification project support and development',
+    self_education: 'Self-education',
+    rewrite_diplom: 'Graduation work rewriting',
+    trampoline_site: 'Trampoline center website development',
+    software_developer: 'Software developer',
+    website_development: 'Website development',
+    from_scratch: 'from scratch',
+    develop_multi_component_app:
+      'Development of a multi-component network application in a team of five members using\n' +
+      ' the Scrum methodology',
+    implement_server_component:
+      'Full implementation of an important component interacting with the exchange',
+    cpp_unit_tests: 'Unit-testing with Catch framework',
+    participate_qt_development: 'Partially designing and implementing a client application on Qt',
+    use_design_patterns: 'Using design patterns',
+    code_review: 'Code review',
+    cpp_qt_developer: 'C++/Qt developer',
+    improve_engine: 'Improvements of the trading engine',
+    log_analysis: 'Exchange log parsing and analysis',
+    log_transactions: 'Features implementing for a transaction logging software',
+    emulate_exchange: 'Development of a program for emulation an exchange',
+    email_sending: 'Sending email to users of specialized sites',
+    auto_download_logs: 'Automatic exchange log downloading',
+    use_svn: 'Using system of version control',
+    higher_education: 'Higher education',
+    informatics_faculcy: 'Faculty of Informatics',
+    languages: 'Languages',
+    russian_level: 'Russian — Native',
+    english_level: 'English — Intermediate',
+    contacts: 'Contacts',
+    pskov_university: 'Pskov State University'
+  },
+  ru: {
+    resume_owner_name: 'Иван Решетников',
+    about_me: 'Обо мне',
+    exchange_trading_company: 'Торговля на бирже',
+    my_passion: 'Люблю писать красивый и понятный код. Интересуюсь новыми технологиями',
+    study_period_hobbi: 'Увлекался олимпиадным программированием в университете',
+    algorithm_knowledge: 'Имею хорошее представление об эффективности алгоритмов',
+    github_profile: 'GitHub профиль',
+    ror_developer: 'Ruby on Rails разработчик',
+    ad_managing_service: 'Сервис для управления рекламой из одного кабинета',
+    present_time: 'по настоящее время',
+    january: 'Январь',
+    february: 'Февраль',
+    march: 'Март',
+    april: 'Апрель',
+    may: 'Май',
+    june: 'Июнь',
+    july: 'Июль',
+    august: 'Август',
+    september: 'Сентябрь',
+    november: 'Ноябрь',
+    october: 'Октябрь',
+    december: 'Декабрь',
+    year: 'год |||| года |||| лет',
+    month: 'месяц |||| месяца |||| месяцев',
+    tasks: 'Задачи',
+    achievements: 'Достижения',
+    technologies: 'Технологии',
+    create_ad_tools: 'Создание инструментов для анализа и управления рекламой',
+    sync_ads: 'Синхронизация статистики, статусов модерации',
+    implement_formats: 'Реализация новых форматов. Обработка ошибок',
+    discuss_solutions: 'Обсуждение вариантов реализации. Ревью кода',
+    deploy_system: 'Деплой системы. Резервное копирование. Мониторинг ошибок',
+    unify_api: 'Унификация API для использования на фронтенде и внешними пользователями',
+    sync_metrica: 'Синхронизация и вывод показателей эффективности рекламы из Яндекс.Метрики',
+    detect_problems: 'Добавление раздела админки для обнаружения проблемных ситуаций',
+    implement_widgets:
+      'Реализация интерактивных виджетов: недельное расписание показов, массовое копирование, превью баннеров',
+    migrate_to_react: 'Миграция фронтенда с CoffeeScript и jQuery на ES6 и React',
+    correct_styles: 'Приведение стилей в кабинете пользователя к аккуратному единообразному виду',
+    odin_project:
+      'Поддержка и разработка сайта для оперативного управления обслуживающими процессами в крупных зданиях, сдающих помещения в аренду',
+    academy_project: 'Поддержка и разработка CRM для повышения квалификации стилистов',
+    self_education: 'Самообразование',
+    rewrite_diplom: 'Переписывание дипломного проекта',
+    trampoline_site: 'Разработка веб-сайта для батутного центра',
+    software_developer: 'Разработчик ПО',
+    website_development: 'Разработка веб-сайта',
+    from_scratch: 'с нуля',
+    develop_multi_component_app:
+      'Разработка многокомпонентного сетевого приложения в команде из пяти разработчиков по методологии Scrum',
+    implement_server_component:
+      'Полная реализация важного компонента, взаимодействующего непосредственно с биржей',
+    cpp_unit_tests: 'Юнит-тестирование с использованием Catch фреймворка',
+    participate_qt_development:
+      'Частичное проектирование и реализация клиентского приложения на Qt',
+    use_design_patterns: 'Использование шаблонов проектирования',
+    code_review: 'Ревью кода',
+    cpp_qt_developer: 'C++/Qt разработчик',
+    improve_engine: 'Улучшение торгового движка',
+    log_analysis: 'Парсинг и анализ биржевого лога',
+    log_transactions: 'Доработки для электронного журнала сделок',
+    emulate_exchange: 'Разработка программы для эмуляции биржи',
+    email_sending: 'Рассылка электронных писем пользователям определённых сайтов',
+    auto_download_logs: 'Автозагрузка логов биржи',
+    use_svn: 'Использование системы контроля версий',
+    higher_education: 'Высшее образование',
+    informatics_faculcy: 'Факультет информатики',
+    languages: 'Знание языков',
+    russian_level: 'Русский — Родной',
+    english_level: 'Английский — Intermediate',
+    contacts: 'Контакты',
+    pskov_university: 'Псковский государственный университет'
+  }
+}
+
+export default memoize((locale: string) => {
+  let i18nOptions: Object = { phrases: translations[locale], locale }
+
+  let i18n = new I18n(i18nOptions)
+
+  return (...args: any) => i18n.t(...args)
+})

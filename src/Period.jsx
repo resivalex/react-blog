@@ -2,35 +2,38 @@
 import React, { Component, Fragment } from 'react'
 import GlyphIconWrapper from './GlyphIconWrapper'
 import Term from './Term'
+import translateFuncForLocale from './translateFuncForLocale'
 
-function tMonth(index: number): string {
-  return (
+function tMonth(index: number, locale: string): string {
+  return translateFuncForLocale(locale)(
     [
       '0 index. start from 1',
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'November',
-      'October',
-      'November'
+      'january',
+      'february',
+      'march',
+      'april',
+      'may',
+      'june',
+      'july',
+      'august',
+      'september',
+      'november',
+      'october',
+      'december'
     ][index] || 'wrong index'
   )
 }
 
 type Props = {
+  locale: string,
   from: string,
   to: string
 }
 
 export default class Period extends Component<Props> {
   render() {
-    const { from, to } = this.props
+    const { locale, from, to } = this.props
+    const t = translateFuncForLocale(locale)
 
     const fromYear = parseInt(from.split('.')[0])
     const fromMonth = parseInt(from.split('.')[1])
@@ -45,14 +48,14 @@ export default class Period extends Component<Props> {
         <Term
           title={
             <Fragment>
-              {durationYears > 0 && `${durationYears} year${durationYears > 1 ? 's' : ''} `}
-              {duratoinMonths > 0 && `${duratoinMonths} month${duratoinMonths > 1 ? 's' : ''}`}
+              {durationYears > 0 && `${durationYears} ${t('year', { smart_count: durationYears })} `}
+              {duratoinMonths > 0 && `${duratoinMonths} ${t('month', { smart_count: duratoinMonths })}`}
             </Fragment>
           }
           description={
             <Fragment>
-              {tMonth(fromMonth)} {fromYear} -{' '}
-              {to === 'now' ? 'Now' : `${tMonth(toMonth)} ${toYear}`}
+              {tMonth(fromMonth, locale)} {fromYear} -{' '}
+              {to === 'now' ? t('present_time') : `${tMonth(toMonth, locale)} ${toYear}`}
             </Fragment>
           }
         />

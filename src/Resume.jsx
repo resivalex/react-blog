@@ -11,12 +11,15 @@ import {
   ListItem,
   Line,
   HalfLine,
-  Link
+  Link,
+  RadioGroup,
+  RadioItem
 } from './Thema'
 import Period from './Period'
 import GlyphIconWrapper from './GlyphIconWrapper'
 import Term from './Term'
 import Tags from './Tags'
+import translateFuncForLocale from './translateFuncForLocale'
 
 const Wrapper = styled.div`
   font-family: 'Open Sans', sans-serif;
@@ -28,8 +31,17 @@ const Footer = styled.div`
 
 type Props = {}
 
-export default class Resume extends Component<Props> {
+type State = {
+  locale: 'ru' | 'en'
+}
+
+export default class Resume extends Component<Props, State> {
+  state = { locale: 'ru' }
+
   render() {
+    const { locale } = this.state
+    const t = translateFuncForLocale(locale)
+
     const nascaCompany = (
       <GlyphIconWrapper name="map-marker">
         <Term
@@ -38,7 +50,7 @@ export default class Resume extends Component<Props> {
             <Fragment>
               <StraightLink link="http://piratetrade.ru" />
               <HalfLine />
-              <div>Exchange trading company</div>
+              <div>{t('exchange_trading_company')}</div>
             </Fragment>
           }
         />
@@ -47,26 +59,33 @@ export default class Resume extends Component<Props> {
 
     return (
       <Wrapper>
-        <Header />
+        <Header locale={locale} />
         <Container>
-          <SectionHeader>About me</SectionHeader>
+          <RadioGroup>
+            <RadioItem active={locale === 'ru'} onClick={() => this.setState({ locale: 'ru' })}>
+              RUS
+            </RadioItem>
+            <RadioItem active={locale === 'en'} onClick={() => this.setState({ locale: 'en' })}>
+              ENG
+            </RadioItem>
+          </RadioGroup>
+          <SectionHeader>{t('about_me')}</SectionHeader>
           <Paragraph>
-            <Line>I like writing beautiful and clear code, am interested in new technologies</Line>
+            <Line>{t('my_passion')}</Line>
             <Line>
-              I was engaged in olympiad programming at the university [
+              {t('study_period_hobbi')} [
               <Link href="http://acm.timus.ru/author.aspx?id=79813">1</Link>
               ], [<Link href="http://codeforces.com/profile/Reshetnikov_Ivan">2</Link>]
             </Line>
-            <Line>So, I have a good idea of the effectiveness and use of algorithms</Line>
+            <Line>{t('algorithm_knowledge')}</Line>
             <HalfLine />
             <Line>
-              GitHub profile <StraightLink link="https://github.com/resivalex" />
+              {t('github_profile')} <StraightLink link="https://github.com/resivalex" />
             </Line>
           </Paragraph>
-
-          <SectionHeader>Ruby on Rails developer</SectionHeader>
+          <SectionHeader>{t('ror_developer')}</SectionHeader>
           <Paragraph>
-            <Period from="2016.12" to="now" />
+            <Period locale={locale} from="2016.12" to="now" />
             <GlyphIconWrapper name="map-marker">
               <Term
                 title="OneRetarget.com"
@@ -74,33 +93,25 @@ export default class Resume extends Component<Props> {
                   <Fragment>
                     <StraightLink link="https://oneretarget.com" />
                     <HalfLine />
-                    <div>A service to manage several ad platforms at one account</div>
+                    <div>{t('ad_managing_service')}</div>
                   </Fragment>
                 }
               />
             </GlyphIconWrapper>
-            <ListHeader>Tasks</ListHeader>
-            <ListItem>Creating tools to analize and manage ads</ListItem>
-            <ListItem>Synchronization of statistics, state of moderation</ListItem>
-            <ListItem>Implementing of new formats. Error handling</ListItem>
-            <ListItem>Discussion of implementation strategies. Code review</ListItem>
-            <ListItem>Deployment of the system. Backups. System state monitoring</ListItem>
-            <ListHeader>Archivements</ListHeader>
-            <ListItem>
-              Modifying the API in such a way it can be used for external users and the frontend
-            </ListItem>
-            <ListItem>
-              Synchronization and display of advertising performance from Yandex.Metrica data
-            </ListItem>
-            <ListItem>Adding a partition for problem detection in the system</ListItem>
-            <ListItem>
-              Implementation of interactive widgets: weekly schedule, bulk copying, ad preview
-            </ListItem>
-            <ListItem>Frontend migration from CoffeeScript and jQuery to ES6 and React</ListItem>
-            <ListItem>
-              Correction of the layout and use of the single style within the entire user account
-            </ListItem>
-            <ListHeader>Technologies</ListHeader>
+            <ListHeader>{t('tasks')}</ListHeader>
+            <ListItem>{t('create_ad_tools')}</ListItem>
+            <ListItem>{t('sync_ads')}</ListItem>
+            <ListItem>{t('implement_formats')}</ListItem>
+            <ListItem>{t('discuss_solutions')}</ListItem>
+            <ListItem>{t('deploy_system')}</ListItem>
+            <ListHeader>{t('achievements')}</ListHeader>
+            <ListItem>{t('unify_api')}</ListItem>
+            <ListItem>{t('sync_metrica')}</ListItem>
+            <ListItem>{t('detect_problems')}</ListItem>
+            <ListItem>{t('implement_widgets')}</ListItem>
+            <ListItem>{t('migrate_to_react')}</ListItem>
+            <ListItem>{t('correct_styles')}</ListItem>
+            <ListHeader>{t('technologies')}</ListHeader>
             <Tags
               items={[
                 'Ruby on Rails 5',
@@ -131,10 +142,9 @@ export default class Resume extends Component<Props> {
               ]}
             />
           </Paragraph>
-
-          <SectionHeader>Ruby on Rails developer</SectionHeader>
+          <SectionHeader>{t('ror_developer')}</SectionHeader>
           <Paragraph>
-            <Period from="2016.04" to="2016.11" />
+            <Period locale={locale} from="2016.04" to="2016.11" />
             <GlyphIconWrapper name="map-marker">
               <Term
                 title="Lakehouse"
@@ -145,9 +155,14 @@ export default class Resume extends Component<Props> {
                 }
               />
             </GlyphIconWrapper>
-            <ListItem>Company projects support</ListItem>
-            <ListItem>Company's projects development</ListItem>
-            <ListHeader>Technologies</ListHeader>
+            <ListHeader>{t('tasks')}</ListHeader>
+            <ListItem>
+              {t('odin_project')} <StraightLink link="http://o-din.ru/" />
+            </ListItem>
+            <ListItem>
+              {t('academy_project')} <StraightLink link="http://e-academie.ru/" />
+            </ListItem>
+            <ListHeader>{t('technologies')}</ListHeader>
             <Tags
               items={[
                 'Ruby on Rails 4',
@@ -161,19 +176,17 @@ export default class Resume extends Component<Props> {
               ]}
             />
           </Paragraph>
-
-          <SectionHeader>Self-education</SectionHeader>
+          <SectionHeader>{t('self_education')}</SectionHeader>
           <Paragraph>
-            <Period from="2016.02" to="2016.04" />
+            <Period locale={locale} from="2016.02" to="2016.04" />
             <ListItem>
-              Graduation work rewriting{' '}
+              {t('rewrite_diplom')}{' '}
               <StraightLink link="https://github.com/resivalex/student-progress-on-rails" />
             </ListItem>
             <ListItem>
-              Trampoline center website development{' '}
-              <StraightLink link="https://github.com/resivalex/zaskok" />
+              {t('trampoline_site')} <StraightLink link="https://github.com/resivalex/zaskok" />
             </ListItem>
-            <ListHeader>Technologies</ListHeader>
+            <ListHeader>{t('technologies')}</ListHeader>
             <Tags
               items={[
                 'Ruby on Rails',
@@ -192,26 +205,21 @@ export default class Resume extends Component<Props> {
               ]}
             />
           </Paragraph>
-
-          <SectionHeader>Software developer</SectionHeader>
+          <SectionHeader>{t('software_developer')}</SectionHeader>
           <Paragraph>
-            <Period from="2015.04" to="2016.01" />
+            <Period locale={locale} from="2015.04" to="2016.01" />
             {nascaCompany}
             <ListItem>
-              Website development <StraightLink link="http://pskovskie.ru" /> from scratch
+              {t('website_development')} <StraightLink link="http://pskovskie.ru" />{' '}
+              {t('from_scratch')}
             </ListItem>
-            <ListItem>
-              Development of a multi-component network application in a team of five members using
-              the Scrum methodology
-            </ListItem>
-            <ListItem>
-              Full implementation of an important component interacting with the exchange
-            </ListItem>
-            <ListItem>Unit-testing with Catch framework</ListItem>
-            <ListItem>Partially designing and implementing a client application on Qt</ListItem>
-            <ListItem>Using design patterns</ListItem>
-            <ListItem>Code review</ListItem>
-            <ListHeader>Technologies</ListHeader>
+            <ListItem>{t('develop_multi_component_app')}</ListItem>
+            <ListItem>{t('implement_server_component')}</ListItem>
+            <ListItem>{t('cpp_unit_tests')}</ListItem>
+            <ListItem>{t('participate_qt_development')}</ListItem>
+            <ListItem>{t('use_design_patterns')}</ListItem>
+            <ListItem>{t('code_review')}</ListItem>
+            <ListHeader>{t('technologies')}</ListHeader>
             <Tags
               items={[
                 'Ruby on Rails 4',
@@ -234,49 +242,45 @@ export default class Resume extends Component<Props> {
               ]}
             />
           </Paragraph>
-
-          <SectionHeader>C++/Qt developer</SectionHeader>
+          <SectionHeader>{t('cpp_qt_developer')}</SectionHeader>
           <Paragraph>
-            <Period from="2012.12" to="2013.09" />
+            <Period locale={locale} from="2012.12" to="2013.09" />
             {nascaCompany}
-            <ListHeader>Tasks</ListHeader>
-            <ListItem>Improvements of the trading engine</ListItem>
-            <ListItem>Exchange log parsing and analysis</ListItem>
-            <ListItem>Features implementing for a transaction logging software</ListItem>
-            <ListItem>Development of a program for emulation an exchange</ListItem>
-            <ListItem>Sending email to users of specialized sites</ListItem>
-            <ListItem>Automatic exchange log downloading</ListItem>
-            <ListItem>Using system of version control</ListItem>
-            <ListHeader>Technologies</ListHeader>
+            <ListHeader>{t('tasks')}</ListHeader>
+            <ListItem>{t('improve_engine')}</ListItem>
+            <ListItem>{t('log_analysis')}</ListItem>
+            <ListItem>{t('log_transactions')}</ListItem>
+            <ListItem>{t('emulate_exchange')}</ListItem>
+            <ListItem>{t('email_sending')}</ListItem>
+            <ListItem>{t('auto_download_logs')}</ListItem>
+            <ListItem>{t('use_svn')}</ListItem>
+            <ListHeader>{t('technologies')}</ListHeader>
             <Tags
               items={['C++', 'C++ Standard Library', 'Qt', 'JavaScript', 'jQuery', 'HTML', 'SVN']}
             />
           </Paragraph>
-
-          <SectionHeader>Higher education</SectionHeader>
+          <SectionHeader>{t('higher_education')}</SectionHeader>
           <Paragraph>
             <GlyphIconWrapper name="send">
               <Term
-                title="Pskov State University"
+                title={t('pskov_university')}
                 description={
                   <Fragment>
                     <Line>2008 - 2013</Line>
-                    <Line>Faculty of Informatics</Line>
+                    <Line>{t('informatics_faculcy')}</Line>
                   </Fragment>
                 }
               />
             </GlyphIconWrapper>
           </Paragraph>
-
-          <SectionHeader>Languages</SectionHeader>
+          <SectionHeader>{t('languages')}</SectionHeader>
           <Paragraph>
             <GlyphIconWrapper name="flag">
-              <Line>Russian — Native</Line>
-              <Line>English — Intermediate</Line>
+              <Line>{t('russian_level')}</Line>
+              <Line>{t('english_level')}</Line>
             </GlyphIconWrapper>
           </Paragraph>
-
-          <SectionHeader>Contacts</SectionHeader>
+          <SectionHeader>{t('contacts')}</SectionHeader>
           <Paragraph>
             <GlyphIconWrapper name="envelope">
               <Link href="mailto:resivalex@gmail.com">resivalex@gmail.com</Link>
