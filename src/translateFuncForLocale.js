@@ -2,11 +2,10 @@
 
 import I18n from 'node-polyglot'
 import memoize from 'memoize-one'
-import { ListItem } from './Thema'
-import React from 'react'
 
 const translations = {
   en: {
+    page_title: 'Resume',
     resume_owner_name: 'Ivan Reshetnikov',
     about_me: 'About me',
     exchange_trading_company: 'Exchange trading company',
@@ -15,6 +14,7 @@ const translations = {
     algorithm_knowledge: 'So, I have a good idea of the effectiveness and use of algorithms',
     github_profile: 'GitHub profile',
     ror_developer: 'Ruby on Rails developer',
+    lead_ror_developer: 'Lead Ruby on Rails developer',
     ad_managing_service: 'A service to manage several ad platforms at one account',
     present_time: 'Present',
     january: 'January',
@@ -37,7 +37,8 @@ const translations = {
     create_ad_tools: 'Creating tools to analyze and manage ads',
     sync_ads: 'Synchronization of statistics, state of moderation',
     implement_formats: 'Implementing of new formats. Error handling',
-    discuss_solutions: 'Discussion of implementation strategies. Code review',
+    discuss_solutions:
+      'Chosing the technical development strategy and tools, suggestion/discussion of implementation ways. Code review',
     deploy_system: 'Deployment of the system. Backups. System state monitoring',
     unify_api: 'Modifying the API in such a way it can be used for external users and the frontend',
     sync_metrica: 'Synchronization and display of advertising performance from Yandex.Metrica data',
@@ -81,6 +82,7 @@ const translations = {
     pskov_university: 'Pskov State University'
   },
   ru: {
+    page_title: 'Резюме',
     resume_owner_name: 'Иван Решетников',
     about_me: 'Обо мне',
     exchange_trading_company: 'Торговля на бирже',
@@ -89,6 +91,7 @@ const translations = {
     algorithm_knowledge: 'Имею хорошее представление об эффективности алгоритмов',
     github_profile: 'GitHub профиль',
     ror_developer: 'Ruby on Rails разработчик',
+    lead_ror_developer: 'Ведущий Ruby on Rails разработчик',
     ad_managing_service: 'Сервис для управления рекламой из одного кабинета',
     present_time: 'по настоящее время',
     january: 'Январь',
@@ -111,7 +114,8 @@ const translations = {
     create_ad_tools: 'Создание инструментов для анализа и управления рекламой',
     sync_ads: 'Синхронизация статистики, статусов модерации',
     implement_formats: 'Реализация новых форматов. Обработка ошибок',
-    discuss_solutions: 'Обсуждение вариантов реализации. Ревью кода',
+    discuss_solutions:
+      'Выбор направления и инструментов для разрития технической части проекта, предложение/обсуждение вариантов реализации, ревью кода',
     deploy_system: 'Деплой системы. Резервное копирование. Мониторинг ошибок',
     unify_api: 'Унификация API для использования на фронтенде и внешними пользователями',
     sync_metrica: 'Синхронизация и вывод показателей эффективности рекламы из Яндекс.Метрики',

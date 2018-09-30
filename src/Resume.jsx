@@ -20,6 +20,7 @@ import GlyphIconWrapper from './GlyphIconWrapper'
 import Term from './Term'
 import Tags from './Tags'
 import translateFuncForLocale from './translateFuncForLocale'
+import DocumentTitle from 'react-document-title'
 
 const Wrapper = styled.div`
   font-family: 'Open Sans', sans-serif;
@@ -59,6 +60,7 @@ export default class Resume extends Component<Props, State> {
 
     return (
       <Wrapper>
+        <DocumentTitle title={t('page_title')} />
         <Header locale={locale} />
         <Container>
           <RadioGroup>
@@ -83,7 +85,7 @@ export default class Resume extends Component<Props, State> {
               {t('github_profile')} <StraightLink link="https://github.com/resivalex" />
             </Line>
           </Paragraph>
-          <SectionHeader>{t('ror_developer')}</SectionHeader>
+          <SectionHeader>{t('lead_ror_developer')}</SectionHeader>
           <Paragraph>
             <Period locale={locale} from="2016.12" to="now" />
             <GlyphIconWrapper name="map-marker">
@@ -99,10 +101,10 @@ export default class Resume extends Component<Props, State> {
               />
             </GlyphIconWrapper>
             <ListHeader>{t('tasks')}</ListHeader>
+            <ListItem>{t('discuss_solutions')}</ListItem>
             <ListItem>{t('create_ad_tools')}</ListItem>
             <ListItem>{t('sync_ads')}</ListItem>
             <ListItem>{t('implement_formats')}</ListItem>
-            <ListItem>{t('discuss_solutions')}</ListItem>
             <ListItem>{t('deploy_system')}</ListItem>
             <ListHeader>{t('achievements')}</ListHeader>
             <ListItem>{t('unify_api')}</ListItem>
@@ -116,7 +118,6 @@ export default class Resume extends Component<Props, State> {
               items={[
                 'Ruby on Rails 5',
                 'PostgreSQL',
-                'Slim',
                 'RSpec',
                 'Cucumber',
                 'Capybara',
@@ -124,21 +125,22 @@ export default class Resume extends Component<Props, State> {
                 'Docker',
                 'Capistrano',
                 'Trailblazer',
+                'React.js',
+                'ES6',
+                'Redux',
+                'Flow',
+                'SASS',
+                'BEM',
+                'Webpack',
+                'yarn',
+                'styled-components',
                 'delayed_job',
                 'VK API',
                 'myTarget API',
                 'Facebook API',
                 'AdWords API',
                 'Metrica API',
-                'React.js',
-                'ES6',
-                'SASS',
-                'BEM',
-                'Webpack',
-                'yarn',
-                'styled-components',
-                'Redux',
-                'Flow'
+                'Backup'
               ]}
             />
           </Paragraph>
