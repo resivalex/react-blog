@@ -2,15 +2,15 @@ const path = require('path')
 
 module.exports = {
   entry: {
-    main: './src/index.js'
+    main: './frontend/index.jsx'
   },
   output: {
-    path: path.resolve(__dirname, 'lib/app/public'),
+    path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
     publicPath: '/'
   },
   devServer: {
-    hot: true
+    hot: false
   },
   resolve: {
     extensions: ['.js', '.jsx']

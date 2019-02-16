@@ -5,15 +5,24 @@ services:
     ports:
     - 80:80
     depends_on:
-    - sinatra
+    - rails
+    - react
     links:
-    - sinatra
-  sinatra:
+    - rails
+    - react
+  rails:
+    build:
+      context: .
+      dockerfile: ./dockers/rails/Dockerfile
     environment:
-      - RACK_ENV=production
-    build: .
-    command: ruby lib/app.rb
-    expose:
-    - 4567
+      - RAILS_ENV=production
+    command: rails s
     ports:
-    - 4567:4567
+      - 4567:3000
+  react:
+    build:
+      context: .
+      dockerfile: ./dockers/react/Dockerfile
+    command: node server.js
+    ports:
+      - 8080:8080
