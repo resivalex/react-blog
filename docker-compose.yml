@@ -16,13 +16,14 @@ services:
       dockerfile: ./dockers/rails/Dockerfile
     environment:
       - RAILS_ENV=production
+      - SECRET_KEY_BASE=rio32pqir23r2h3ur23prh2u13r213r
     command: rails s
-    ports:
-      - 4567:3000
+    expose:
+      - 3000
   react:
     build:
       context: .
       dockerfile: ./dockers/react/Dockerfile
     command: node server.js
-    ports:
-      - 8080:8080
+    expose:
+      - 8080

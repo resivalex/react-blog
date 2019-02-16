@@ -3,7 +3,17 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Container } from './Thema'
 import Modal from 'react-responsive-modal'
-import translateFuncForLocale from './translateFuncForLocale'
+import translateFunction from './translateFunction'
+
+const translations = {
+  en: {
+    resume_owner_name: 'Ivan Reshetnikov'
+  },
+  ru: {
+    resume_owner_name: 'Иван Решетников'
+  }
+}
+
 
 const HeaderBlock = styled.div`
   background-color: black;
@@ -66,7 +76,7 @@ export default class Header extends Component<Props, State> {
             </Modal>
             <PhotoPreview onClick={() => this.setState({ isOpen: true })} />
             <Spacer />
-            <Title>{translateFuncForLocale(locale)('resume_owner_name')}</Title>
+            <Title>{translateFunction(translations, locale)('resume_owner_name')}</Title>
           </Wrapper>
         </Container>
       </HeaderBlock>
