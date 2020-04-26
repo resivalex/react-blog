@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, Fragment, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import Header from './Header'
 import styled from 'styled-components'
 import {
