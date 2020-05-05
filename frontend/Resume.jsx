@@ -69,9 +69,7 @@ function Company(company: CompanyType) {
 function TextWithLinks(text) {
   const words = text.split(' ')
   const wordsAndSpaces = _.flatten(words.map((word) => [word, ' '])).slice(0, -1)
-  console.log({ words, wordsAndSpaces })
   return _.map(wordsAndSpaces, (word, index: number) => {
-    console.log(word)
     return word.indexOf('http') === 0 ? (
       <StraightLink key={index} link={word} />
     ) : (
