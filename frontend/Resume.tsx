@@ -113,6 +113,8 @@ function Position(locale, t, period, title, company, tasks, achievements, tags) 
   )
 }
 
+const tr = { ru: { page_title: 'Резюме' }, en: { page_title: 'CV' } }
+
 export default function Resume(props: Props) {
   const locale = props.locale
   const setLocale = props.onChangeLocale
@@ -122,7 +124,7 @@ export default function Resume(props: Props) {
 
   return (
     <Wrapper>
-      <DocumentTitle title={t('page_title')} />
+      <DocumentTitle title={tr[locale].page_title} />
       <Header locale={locale} />
       <Container>
         <RadioGroup>
