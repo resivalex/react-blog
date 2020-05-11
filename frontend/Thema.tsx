@@ -1,4 +1,3 @@
-// @flow
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import _ from 'lodash'
@@ -44,7 +43,7 @@ class Paragraph extends Component<{ children: any }> {
   }
 }
 
-class StraightLink extends Component<Object> {
+class StraightLink extends Component<{ link: string }> {
   render() {
     const { link } = this.props
     const props = _.omit(this.props, 'link')
@@ -91,7 +90,8 @@ const RadioGroup = styled.div`
   display: inline-flex;
 `
 
-const RadioItem = styled.div`
+const div: any = styled.div
+const RadioItem = div`
   cursor: ${({ active }) => (active ? 'default' : 'pointer')};
   background-color: ${({ active }) => (active ? 'black' : 'white')};
   color: ${({ active }) => (active ? 'white' : 'black')};

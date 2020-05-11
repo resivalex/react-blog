@@ -1,4 +1,3 @@
-// @flow
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
@@ -15,8 +14,8 @@ const Spacer = styled.div`
   width: 8px;
 `
 
-type Props = {
-  children: any,
+interface Props {
+  children: any
   name: string
 }
 

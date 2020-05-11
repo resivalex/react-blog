@@ -1,4 +1,3 @@
-// @flow
 import React, { useState } from 'react'
 import Resume from './Resume'
 import _ from 'lodash'
@@ -19,15 +18,14 @@ export default function ResumeContainer() {
       })
   }
 
-  return data ? (
+  return (
     <Resume
       data={data}
+      locale={locale === 'ru' ? 'ru' : 'en'}
       onChangeLocale={(locale) => {
         setLocale(locale)
         setData(null)
       }}
     />
-  ) : (
-    'Loading...'
   )
 }
