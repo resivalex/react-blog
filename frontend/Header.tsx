@@ -1,4 +1,3 @@
-// @flow
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Container } from './Thema'
@@ -13,7 +12,6 @@ const translations = {
     resume_owner_name: 'Иван Решетников'
   }
 }
-
 
 const HeaderBlock = styled.div`
   background-color: black;
@@ -53,11 +51,11 @@ const Photo = styled.img`
   width: 100%;
 `
 
-type Props = {
+interface Props {
   locale: string
 }
 
-type State = {
+interface State {
   isOpen: boolean
 }
 

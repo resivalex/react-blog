@@ -1,7 +1,5 @@
-// @flow
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import type { Node } from 'react'
 
 const Wrapper = styled.div`
   padding-bottom: 6px;
@@ -17,9 +15,9 @@ const Description = styled.div`
   font-size: 14px;
 `
 
-type Props = {
-  title: Node,
-  description?: Node
+interface Props {
+  title: any
+  description: any
 }
 
 export default class Term extends Component<Props> {

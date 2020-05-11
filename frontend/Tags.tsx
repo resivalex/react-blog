@@ -1,4 +1,3 @@
-// @flow
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import _ from 'lodash'
@@ -29,7 +28,7 @@ const Tag = styled.div`
   font-size: 16px;
 `
 
-type Props = {
+interface Props {
   items: Array<string>
 }
 
@@ -46,8 +45,7 @@ export default class Tags extends Component<Props> {
               {index !== items.length - 1 && <Spacer />}
             </TagWrapper>
           )
-        })
-        }
+        })}
       </Wrapper>
     )
   }

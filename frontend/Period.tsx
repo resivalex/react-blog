@@ -1,4 +1,3 @@
-// @flow
 import React, { Component, Fragment } from 'react'
 import GlyphIconWrapper from './GlyphIconWrapper'
 import Term from './Term'
@@ -42,7 +41,10 @@ const phrases = {
 }
 
 function tMonth(index: number, locale: string): string {
-  return translateFunction(phrases, locale)(
+  return translateFunction(
+    phrases,
+    locale
+  )(
     [
       '0 index. start from 1',
       'january',
@@ -61,9 +63,9 @@ function tMonth(index: number, locale: string): string {
   )
 }
 
-type Props = {
-  locale: string,
-  from: string,
+interface Props {
+  locale: string
+  from: string
   to: string
 }
 
