@@ -11,29 +11,17 @@ export interface PeriodType {
   to: string
 }
 
+export interface Position {
+  title: string
+  period: PeriodType
+  company: CompanyType | null
+  tasks: string[] | null
+  achievements: string[] | null
+  tags: string[]
+}
+
 export interface ResumeType {
   translations: any
-  oneretargetPeriod: PeriodType
-  oneretarget: CompanyType
-  oneretargetTasks: string[]
-  oneretargetAchievements: string[]
-  oneretargetTags: string[]
 
-  lakehousePeriod: PeriodType
-  lakehouse: CompanyType
-  lakehouseTasks: string[]
-  lakehouseTags: string[]
-
-  selfEducationPeriod: PeriodType
-  selfEducationTasks: string[]
-  selfEducationTags: string[]
-
-  nascaPeriod2: PeriodType
-  nasca: CompanyType
-  nasca2Tasks: string[]
-  nascaTags2: string
-
-  nascaPeriod: PeriodType
-  nascaTasks: string[]
-  nascaTags: string[]
+  positions: Position[]
 }

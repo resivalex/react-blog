@@ -2,17 +2,15 @@
   "compilerOptions": {
     "module": "commonjs",
     "moduleResolution": "node",
-    "noImplicitAny": false,
     "sourceMap": true,
     "target": "es6",
-    "removeComments": false,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "suppressExcessPropertyErrors": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "typeRoots": ["node_modules/@types"],
-    "jsx": "react"
+    "jsx": "react",
+    "strictNullChecks": true
   },
   "exclude": ["node_modules"]
 }

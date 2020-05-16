@@ -11,7 +11,7 @@ interface ResumeTypeResponseItem {
 
 export default function ResumeContainer() {
   const [locale, setLocale] = useState('ru')
-  const [data, setData] = useState(null)
+  const [data, setData] = useState<ResumeType | null>(null)
 
   if (data === null) {
     window
@@ -20,7 +20,11 @@ export default function ResumeContainer() {
         return response.json()
       })
       .then((resumes: ResumeTypeResponseItem[]) => {
-        const data: ResumeType = _.find(resumes, (resume) => resume.locale === locale).lump_data
+        const resume: ResumeTypeResponseItem | undefined = _.find(
+          resumes,
+          (resume) => resume.locale === locale
+        )
+        const data: ResumeType | null = resume ? resume.lump_data : null
         setData(data)
       })
   }

@@ -39,7 +39,7 @@ interface CompanyType {
 }
 
 interface Props {
-  data: ResumeType
+  data: ResumeType | null
   locale: LocaleType
   onChangeLocale: Function
 }
@@ -85,7 +85,7 @@ function ListItems(items: string[]) {
 
 function Position(locale, t, period: PeriodType, title, company, tasks, achievements, tags) {
   return (
-    <Fragment>
+    <Fragment key={title}>
       <SectionHeader>{title}</SectionHeader>
       <Paragraph>
         <Period locale={locale} from={period.from} to={period.to} />
@@ -119,8 +119,10 @@ export default function Resume(props: Props) {
   const locale = props.locale
   const setLocale = props.onChangeLocale
   const data = props.data
+  const data2 = data // convertToSecondType(data, locale)
 
-  const t = translateFunction(props.data ? props.data.translations : {}, locale)
+  console.log(JSON.stringify(data2, null, 2))
+  const t = translateFunction(data2 ? data2.translations : {}, locale)
 
   return (
     <Wrapper>
@@ -135,7 +137,7 @@ export default function Resume(props: Props) {
             ENG
           </RadioItem>
         </RadioGroup>
-        {data ? (
+        {data2 ? (
           <Fragment>
             <SectionHeader>{t('about_me')}</SectionHeader>
             <Paragraph>
@@ -151,55 +153,17 @@ export default function Resume(props: Props) {
                 {TextWithLinks(t('github_profile') + ' ' + 'https://github.com/resivalex')}
               </Line>
             </Paragraph>
-            {Position(
-              locale,
-              t,
-              data.oneretargetPeriod,
-              t('lead_ror_developer'),
-              data.oneretarget,
-              data.oneretargetTasks,
-              data.oneretargetAchievements,
-              data.oneretargetTags
-            )}
-            {Position(
-              locale,
-              t,
-              data.lakehousePeriod,
-              t('ror_developer'),
-              data.lakehouse,
-              data.lakehouseTasks,
-              null,
-              data.lakehouseTags
-            )}
-            {Position(
-              locale,
-              t,
-              data.selfEducationPeriod,
-              t('self_education'),
-              null,
-              data.selfEducationTasks,
-              null,
-              data.selfEducationTags
-            )}
-            {Position(
-              locale,
-              t,
-              data.nascaPeriod2,
-              t('software_developer'),
-              data.nasca,
-              data.nasca2Tasks,
-              null,
-              data.nascaTags2
-            )}
-            {Position(
-              locale,
-              t,
-              data.nascaPeriod,
-              t('cpp_qt_developer'),
-              data.nasca,
-              data.nascaTasks,
-              null,
-              data.nascaTags
+            {_.map(data2.positions, (position) =>
+              Position(
+                locale,
+                t,
+                position.period,
+                position.title,
+                position.company,
+                position.tasks,
+                position.achievements,
+                position.tags
+              )
             )}
             <SectionHeader>{t('higher_education')}</SectionHeader>
             <Paragraph>
