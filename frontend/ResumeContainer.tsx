@@ -1,6 +1,13 @@
 import React, { useState } from 'react'
 import Resume from './Resume'
 import _ from 'lodash'
+import { LocaleType, ResumeType } from './types'
+
+interface ResumeTypeResponseItem {
+  id: number
+  locale: LocaleType
+  lump_data: ResumeType
+}
 
 export default function ResumeContainer() {
   const [locale, setLocale] = useState('ru')
@@ -12,8 +19,8 @@ export default function ResumeContainer() {
       .then((response) => {
         return response.json()
       })
-      .then((resumes) => {
-        const data = _.find(resumes, (resume) => resume.locale === locale).lump_data
+      .then((resumes: ResumeTypeResponseItem[]) => {
+        const data: ResumeType = _.find(resumes, (resume) => resume.locale === locale).lump_data
         setData(data)
       })
   }

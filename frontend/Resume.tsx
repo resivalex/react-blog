@@ -22,7 +22,7 @@ import translateFunction from './translateFunction'
 import _ from 'lodash'
 
 import DocumentTitle from 'react-document-title'
-import { LocaleType } from './types'
+import { LocaleType, PeriodType, ResumeType } from './types'
 
 const Wrapper = styled.div`
   font-family: 'Open Sans', sans-serif;
@@ -39,7 +39,7 @@ interface CompanyType {
 }
 
 interface Props {
-  data: any
+  data: ResumeType
   locale: LocaleType
   onChangeLocale: Function
 }
@@ -77,13 +77,13 @@ function TextWithLinks(text) {
   })
 }
 
-function ListItems(items: Array<string>) {
+function ListItems(items: string[]) {
   return _.map(items, (item, index: number) => (
     <ListItem key={index}>{TextWithLinks(item)}</ListItem>
   ))
 }
 
-function Position(locale, t, period, title, company, tasks, achievements, tags) {
+function Position(locale, t, period: PeriodType, title, company, tasks, achievements, tags) {
   return (
     <Fragment>
       <SectionHeader>{title}</SectionHeader>

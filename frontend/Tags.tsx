@@ -29,7 +29,7 @@ const Tag = styled.div`
 `
 
 interface Props {
-  items: Array<string>
+  items: string[]
 }
 
 export default class Tags extends Component<Props> {
