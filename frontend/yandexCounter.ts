@@ -15,7 +15,7 @@ export default function () {
     const n = d.getElementsByTagName('script')[0]
     const s = d.createElement('script')
     const f = function () {
-      n.parentNode.insertBefore(s, n)
+      n && n.parentNode.insertBefore(s, n)
     }
     s.type = 'text/javascript'
     s.async = true
