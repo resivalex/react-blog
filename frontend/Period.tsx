@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import GlyphIconWrapper from './GlyphIconWrapper'
 import Term from './Term'
-import translateFunction from './translateFunction'
+import I18n from 'node-polyglot'
 
 const phrases = {
   en: {
@@ -40,11 +40,8 @@ const phrases = {
   }
 }
 
-function tMonth(index: number, locale: string): string {
-  return translateFunction(
-    phrases,
-    locale
-  )(
+function tMonth(index: number, t: Function): string {
+  return t(
     [
       '0 index. start from 1',
       'january',
@@ -72,7 +69,8 @@ interface Props {
 export default class Period extends Component<Props> {
   render() {
     const { locale, from, to } = this.props
-    const t = translateFunction(phrases, locale)
+    const i18n = new I18n({ phrases: locale === 'en' ? phrases.en : phrases.ru, locale: locale })
+    const t = (key: string, options?: Object) => i18n.t(key, options)
 
     const fromYear = parseInt(from.split('.')[0])
     const fromMonth = parseInt(from.split('.')[1])
@@ -95,8 +93,8 @@ export default class Period extends Component<Props> {
           }
           description={
             <Fragment>
-              {tMonth(fromMonth, locale)} {fromYear} -{' '}
-              {to === 'now' ? t('present_time') : `${tMonth(toMonth, locale)} ${toYear}`}
+              {tMonth(fromMonth, t)} {fromYear} -{' '}
+              {to === 'now' ? t('present_time') : `${tMonth(toMonth, t)} ${toYear}`}
             </Fragment>
           }
         />

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Container } from './Thema'
 import Modal from 'react-responsive-modal'
-import translateFunction from './translateFunction'
 
 const translations = {
   en: {
@@ -74,7 +73,11 @@ export default class Header extends Component<Props, State> {
             </Modal>
             <PhotoPreview onClick={() => this.setState({ isOpen: true })} />
             <Spacer />
-            <Title>{translateFunction(translations, locale)('resume_owner_name')}</Title>
+            <Title>
+              {locale === 'en'
+                ? translations.en.resume_owner_name
+                : translations.ru.resume_owner_name}
+            </Title>
           </Wrapper>
         </Container>
       </HeaderBlock>

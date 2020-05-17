@@ -18,7 +18,6 @@ import Period from './Period'
 import GlyphIconWrapper from './GlyphIconWrapper'
 import Term from './Term'
 import Tags from './Tags'
-import translateFunction from './translateFunction'
 import _ from 'lodash'
 
 import DocumentTitle from 'react-document-title'
@@ -92,19 +91,19 @@ function Position(locale, t, period: PeriodType, title, company, tasks, achievem
         {company && Company(company)}
         {tasks && (
           <Fragment>
-            <ListHeader>{t('tasks')}</ListHeader>
+            <ListHeader>{t.tasks}</ListHeader>
             {ListItems(tasks)}
           </Fragment>
         )}
         {achievements && (
           <Fragment>
-            <ListHeader>{t('achievements')}</ListHeader>
+            <ListHeader>{t.achievements}</ListHeader>
             {ListItems(achievements)}
           </Fragment>
         )}
         {tags && (
           <Fragment>
-            <ListHeader>{t('technologies')}</ListHeader>
+            <ListHeader>{t.technologies}</ListHeader>
             <Tags items={tags} />
           </Fragment>
         )}
@@ -113,20 +112,55 @@ function Position(locale, t, period: PeriodType, title, company, tasks, achievem
   )
 }
 
-const tr = { ru: { page_title: 'Резюме' }, en: { page_title: 'CV' } }
+const tr = {
+  ru: {
+    page_title: 'Резюме',
+    tasks: 'Задачи',
+    about_me: 'Обо мне',
+    contacts: 'Контакты',
+    languages: 'Знание языков',
+    my_passion: 'Люблю писать красивый и понятный код. Интересуюсь новыми технологиями',
+    achievements: 'Достижения',
+    technologies: 'Технологии',
+    english_level: 'Английский — Upper Intermediate',
+    russian_level: 'Русский — Родной',
+    github_profile: 'GitHub профиль',
+    higher_education: 'Высшее образование',
+    pskov_university: 'Псковский государственный университет',
+    study_period_hobbi: 'Увлекался олимпиадным программированием в университете',
+    algorithm_knowledge: 'Имею хорошее представление об эффективности алгоритмов',
+    informatics_faculcy: 'Факультет информатики'
+  },
+  en: {
+    page_title: 'CV',
+    tasks: 'Tasks',
+    about_me: 'About me',
+    contacts: 'Contacts',
+    languages: 'Languages',
+    my_passion: 'I like writing beautiful and clear code, am interested in new technologies',
+    achievements: 'Achievements',
+    technologies: 'Technologies',
+    english_level: 'English — Upper Intermediate',
+    russian_level: 'Russian — Native',
+    github_profile: 'GitHub profile',
+    higher_education: 'Higher education',
+    pskov_university: 'Pskov State University',
+    study_period_hobbi: 'I was engaged in olympiad programming at the university',
+    algorithm_knowledge: 'So, I have a good idea of the effectiveness and use of algorithms',
+    informatics_faculcy: 'Faculty of Informatics'
+  }
+}
 
 export default function Resume(props: Props) {
   const locale = props.locale
   const setLocale = props.onChangeLocale
   const data = props.data
-  const data2 = data // convertToSecondType(data, locale)
 
-  console.log(JSON.stringify(data2, null, 2))
-  const t = translateFunction(data2 ? data2.translations : {}, locale)
+  const t = tr[locale]
 
   return (
     <Wrapper>
-      <DocumentTitle title={tr[locale].page_title} />
+      <DocumentTitle title={t.page_title} />
       <Header locale={locale} />
       <Container>
         <RadioGroup>
@@ -137,23 +171,21 @@ export default function Resume(props: Props) {
             ENG
           </RadioItem>
         </RadioGroup>
-        {data2 ? (
+        {data ? (
           <Fragment>
-            <SectionHeader>{t('about_me')}</SectionHeader>
+            <SectionHeader>{t.about_me}</SectionHeader>
             <Paragraph>
-              <Line>{t('my_passion')}</Line>
+              <Line>{t.my_passion}</Line>
               <Line>
-                {t('study_period_hobbi')} [
+                {t.study_period_hobbi} [
                 <Link href="http://acm.timus.ru/author.aspx?id=79813">1</Link>
                 ], [<Link href="http://codeforces.com/profile/Reshetnikov_Ivan">2</Link>]
               </Line>
-              <Line>{t('algorithm_knowledge')}</Line>
+              <Line>{t.algorithm_knowledge}</Line>
               <HalfLine />
-              <Line>
-                {TextWithLinks(t('github_profile') + ' ' + 'https://github.com/resivalex')}
-              </Line>
+              <Line>{TextWithLinks(t.github_profile + ' ' + 'https://github.com/resivalex')}</Line>
             </Paragraph>
-            {_.map(data2.positions, (position) =>
+            {_.map(data.positions, (position) =>
               Position(
                 locale,
                 t,
@@ -165,28 +197,28 @@ export default function Resume(props: Props) {
                 position.tags
               )
             )}
-            <SectionHeader>{t('higher_education')}</SectionHeader>
+            <SectionHeader>{t.higher_education}</SectionHeader>
             <Paragraph>
               <GlyphIconWrapper name="send">
                 <Term
-                  title={t('pskov_university')}
+                  title={t.pskov_university}
                   description={
                     <Fragment>
                       <Line>2008 - 2013</Line>
-                      <Line>{t('informatics_faculcy')}</Line>
+                      <Line>{t.informatics_faculcy}</Line>
                     </Fragment>
                   }
                 />
               </GlyphIconWrapper>
             </Paragraph>
-            <SectionHeader>{t('languages')}</SectionHeader>
+            <SectionHeader>{t.languages}</SectionHeader>
             <Paragraph>
               <GlyphIconWrapper name="flag">
-                <Line>{t('russian_level')}</Line>
-                <Line>{t('english_level')}</Line>
+                <Line>{t.russian_level}</Line>
+                <Line>{t.english_level}</Line>
               </GlyphIconWrapper>
             </Paragraph>
-            <SectionHeader>{t('contacts')}</SectionHeader>
+            <SectionHeader>{t.contacts}</SectionHeader>
             <Paragraph>
               <GlyphIconWrapper name="envelope">
                 <Link href="mailto:resivalex@gmail.com">resivalex@gmail.com</Link>
