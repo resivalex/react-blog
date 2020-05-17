@@ -10,7 +10,9 @@ interface ResumeTypeResponseItem {
 }
 
 export default function ResumeContainer() {
-  const [locale, setLocale] = useState('ru')
+  const [locale, setLocale] = useState(
+    window.location.pathname === '/en' || window.location.pathname === '/en/' ? 'en' : 'ru'
+  )
   const [data, setData] = useState<ResumeType | null>(null)
 
   if (data === null) {
